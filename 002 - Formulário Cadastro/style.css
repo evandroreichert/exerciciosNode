@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');   /*Google Fonts*/
+
+*{                                                  /*Configurações Globais*/
+    font-family: 'Poppins', sans-serif;             
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #e0e0e0;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+main{                                                          
+    width: 45vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    background: #e0e0e0;
+    box-shadow:  20px 20px 60px #bebebe,
+                 -20px -20px 60px #ffffff;
+    padding: 30px;
+}
+
+fieldset{
+    border: none;
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    margin-top: 15px;
+    font-size: 1.1em;
+}
+
+input{
+    padding-left: 3px;
+}
+
+form h1{
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+label#fem{                          /* Espaçamento entre Fem e Masc */
+    margin-right: 15px;
+}
+
+.necessidadestitle{
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+}
+
+.necessidadesEspeciais input{
+    margin-bottom: 13px;
+}
+
+/* Botões / Hover dos Botões */
+
+button{
+    margin: 10px 25px;
+    width: 70%;
+    font-weight: bolder;
+    background-color: #bebebe;
+    color: #272727;
+    font-size: 1.2em;
+    padding: 13px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.salvar{
+    margin-top: 40px;
+}
+
+.salvar:hover{
+    background-color: white;
+    transition: .6s ease;
+}
+
+.resetar:hover{
+    background-color: #6f161a;
+    color: white;
+    transition: .6s ease;
+}

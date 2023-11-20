@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Aluno</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+</head>
+
+<body>
+
+    <main>
+
+
+
+        <!-- Início do formulário -->
+
+        <form>
+            <fieldset class="infoBasica">
+                <h1>Cadastre-se</h1>
+
+                <!-- Inputs Cadastro -->
+
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nNome" required>
+
+                <label for="sobrenome">Sobrenome</label>
+                <input type="text" id="sobrenome" name="nSobrenome" required>
+
+                <label for="nasc">Data de Nascimento</label>
+                <input type="date" id="nasc" min="2000-01-01" max="2017-12-31" name="nNascimento" required>
+
+                <label for="address">Endereço</label>
+                <input type="text" id="address" name="nEndereco">
+
+                <label for="mae">Nome da Mãe</label>
+                <input type="text" id="mae" name="nMae">
+
+                <label for="pai">Nome do Pai</label>
+                <input type="text" id="pai" name="nPai">
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="nEmail" required>
+
+                <label for="tel">Telefone</label>
+                <input type="tel" id="tel" name="nTel" required>
+
+                <label for="serie">Série</label>
+                <input type="number" id="serie" min="1" max="9" name="nSerie" required>
+
+                <label for="sexo">Sexo</label>
+                <div class="checkSexo">
+                    <input type="radio" name="sexo" id="fem" value="F" checked>
+                    <label for="fem" id="fem">Feminino</label>
+                    <input type="radio" name="sexo" id="masc" value="M">
+                    <label for="masc" id="masc">Masculino</label>
+                </div>
+
+                <!-- Checkbox Necessidades -->
+
+                <label for="necessidade" class="necessidadestitle">Necessidades Especiais</label>
+
+                <div class="necessidadesEspeciais">
+                    <div class="auditiva">
+                        <input type="checkbox" id="auditiva" name="nAuditiva" value="auditiva">
+                        <label for="auditiva">Deficiência Auditiva</label>
+                    </div>
+                    <div class="motora">
+                        <input type="checkbox" id="motora" value="motora" name="nMotora">
+                        <label for="motora">Deficiência Motora</label>
+                    </div>
+                    <div class="visual">
+                        <input type="checkbox" id="visual" value="visual" name="nVisual">
+                        <label for="visual">Deficiência Visual</label>
+                    </div>
+                    <div class="paralisia">
+                        <input type="checkbox" id="paralisia" value="paralisiaCerebral" name="nParalisia">
+                        <label for="paralisia">Paralisia Cerebral</label>
+                    </div>
+                    <div class="autismo">
+                        <input type="checkbox" id="autismo" value="autismo" name="nAutismo">
+                        <label for="autismo">Perturbação do Espectro Autista</label>
+                    </div>
+                    <div class="foro">
+                        <input type="checkbox" id="foro" value="foro" name="nForo">
+                        <label for="foro">Perturbação do Foro Psicológico</label>
+                    </div>
+                    <div class="aprendizagem">
+                        <input type="checkbox" id="aprendizagem" value="aprendizagem" name="nAprendizagem">
+                        <label for="aprendizagem">Pertubações de aprendizagem</label>
+                    </div>
+                    <div class="habilidades">
+                        <input type="checkbox" id="habilidades" value="habilidades" name="nHabilidades">
+                        <label for="habilidades">Altas Habilidades</label>
+                    </div>
+                </div>
+            </fieldset>
+            <!-- Botões -->
+
+            <div class="formActions">
+                <button type="button" class="salvar" id="enviarGET">Enviar GET</button>
+                <button type="button" class="salvar" id="enviarPOST">Enviar POST</button>
+
+                <button type="reset" class="resetar">Limpar Tela</button>
+            </div>
+
+        </form>
+        <!-- Fim do formulário -->
+    </main>
+
+    <script src="get.js"></script>
+    <script src="post.js"></script>
+
+</body>
+
+</html>
