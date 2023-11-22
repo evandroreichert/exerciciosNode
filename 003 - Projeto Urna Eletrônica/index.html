@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urna Eletrônica</title>
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/client/assets/css/style.css">
+</head>
+<body>
+
+    <main>
+        <form method="post">
+            <h1>Urna Eletrônica</h1>
+
+            <div class="container">
+                <div class="candidato">
+                    <img src="/client/assets/img/politico.png" alt="imagem do candidato">
+                    <p class="nomeCandidato">Ivan Borchardt</p>
+                    <input type="number" name="numeroCandidato" id="inumeroCandidato" minlength="2" placeholder="Número do Candidato" value="00" required>
+                </div>
+                
+                <div class="actionsUrna">
+                    <button type="submit" class="confirma">Confirma</button>
+                    <button type="reset" class="corrige">Corrige</button>
+                    <button type="submit" value="branco" class="branco">Branco</button>
+                </div>
+            </div>
+
+        </form>
+    </main>
+    
+</body>
+</html>
