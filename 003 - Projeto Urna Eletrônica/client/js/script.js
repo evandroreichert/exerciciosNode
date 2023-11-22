@@ -1,11 +1,19 @@
 const numeroCandidatoInput = document.querySelector('#iNumeroCandidato')
 let nomeCandidato = document.querySelector('.nomeCandidato')
 let imgCandidato = document.querySelector('.imgCandidato')
-
 const candidato = {}
+
+const btnConfirma = document.querySelector('.confirma')
+const btnCorrige = document.querySelector('.corrige')
+const btnBranco = document.querySelector('.branco')
 
 numeroCandidatoInput.addEventListener('keydown', fetchCandidatos)
 numeroCandidatoInput.addEventListener('change', fetchCandidatos)
+
+btnCorrige.addEventListener('click', () => {
+    numeroCandidatoInput.value = '00'
+    nomeCandidato.innerHTML = 'Ivan Borchardt'
+})
 
 async function fetchCandidatos() {
     try {
