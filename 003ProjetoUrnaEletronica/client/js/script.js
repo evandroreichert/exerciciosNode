@@ -31,7 +31,9 @@ async function fetchCandidatos() {
             candidato.imagem = candidatos[candidatoIndex + 2]
 
             nomeCandidato.innerHTML = candidato.nome
-            console.log(candidato)
+            imgCandidato.src = candidato.imagem
+
+            console.log(imgCandidato)
         } else {
             nomeCandidato.innerHTML = 'Escolha um candidato válido'
             console.log('Candidato não encontrado.')
