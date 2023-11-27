@@ -77,12 +77,15 @@ btnConfirma.addEventListener('click', async function fetchVoto() {
         headers: { "Content-Type": "application/json" }
     };
 
-
     let response = await fetch("http://localhost:3000/voto", option)
     let mensagem = await response.json()
 
-    if (mensagem.status == 200) {
+    if (mensagem.status == 200 && numeroCandidatoInput.value.trim() != '') {
         mostrarModal('modalSucesso');
+
+        let somSucesso = new Audio('../assets/audio/confirma-urna.mp3');
+            somSucesso.play();
+            somSucesso.volume = 0.1;
 
         setTimeout(() => fecharModal('modalSucesso'), 2000);
     } else {
@@ -91,14 +94,15 @@ btnConfirma.addEventListener('click', async function fetchVoto() {
         btnConfirma.setAttribute('disabled', '');
         btnConfirma.classList.add('disabled')
 
+        let somError = new Audio('../assets/audio/error-urna.mp3');
+        somError.play();
+        somSucesso.volume = 0.7;
     }
-
-    console.log(mensagem.status);
 })
 
 function mostrarModal(idModal) {
     var modal = document.getElementById(idModal);
-    modal.style.display = "block";
+    modal.style.display = "flex";
 
     // Desabilitar todos os elementos da tela
     var elementosDesabilitaveis = document.querySelectorAll('button, input');
