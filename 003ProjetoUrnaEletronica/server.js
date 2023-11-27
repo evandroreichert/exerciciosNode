@@ -52,6 +52,7 @@ app.post('/voto', async (req, res) => {
 })
 
 app.get('/apuracao', async (req, res) => {
+
     try {
         const conteudoCsv = await fs.readFile('votacao.csv', 'utf-8');
         const linhas = conteudoCsv.split('\n');
@@ -105,6 +106,7 @@ app.get('/apuracao', async (req, res) => {
             .sort((a, b) => b.qtdVotos - a.qtdVotos); // Ordena em ordem decrescente pela quantidade de votos
 
         res.json(resultadoApuracao);
+
     } catch (error) {
         console.error("Erro:", error);
         res.status(500).json({
