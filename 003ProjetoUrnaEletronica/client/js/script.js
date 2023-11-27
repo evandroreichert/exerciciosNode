@@ -10,8 +10,6 @@ const btnBranco = document.querySelector('.branco')
 numeroCandidatoInput.addEventListener('keydown', fetchCandidatos)
 numeroCandidatoInput.addEventListener('change', fetchCandidatos)
 
-imgCandidato.src = 'assets/img/politico.png'
-
 btnCorrige.addEventListener('click', () => {
     numeroCandidatoInput.value = '00'
     nomeCandidato.innerHTML = 'Ivan Borchardt'
@@ -20,6 +18,8 @@ btnCorrige.addEventListener('click', () => {
 
 btnConfirma.addEventListener('click', fetchVoto)
 btnBranco.addEventListener('click', votoBranco)
+
+imgCandidato.src = 'assets/img/politico.png'
 
 async function fetchCandidatos() {
     try {
