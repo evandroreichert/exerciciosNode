@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
     <script defer src="js/script.js"></script>
 </head>
+
 <body>
 
     <main>
@@ -16,20 +18,35 @@
 
             <div class="container">
                 <div class="candidato">
-                    <img src="/client/assets/img/politico.png" class="imgCandidato" alt="imagem do candidato">
+                    <img src="/img/politico.png" class="imgCandidato" alt="imagem do candidato">
                     <p class="nomeCandidato">Ivan Borchardt</p>
-                    <input type="number" id="iNumeroCandidato" name="numeroCandidato" id="inumeroCandidato" minlength="2" maxlength="2" placeholder="Número do Candidato" value="" required>
+                    <input type="number" id="iNumeroCandidato" name="numeroCandidato" id="inumeroCandidato" min="0"
+                        max="99" minlength="2" maxlength="2" placeholder="Número do Candidato" value="" required>
                 </div>
-                
+
                 <div class="actionsUrna">
-                    <button type="submit" class="confirma">Confirma</button>
+                    <button type="button" class="confirma">Confirma</button>
                     <button type="button" class="corrige">Corrige</button>
                     <button type="submit" value="branco" class="branco">Branco</button>
+                </div>
+
+                <div id="modalSucesso" class="modal">
+                    <div class="modal-content">
+                        <p>Voto Registrado com Sucesso!</p>
+                    </div>
+                </div>
+
+                <div id="modalErro" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="fecharModal('modalErro')">&times;</span>
+                        <p>Erro ao registrar voto. Contate o administrador do sistema.</p>
+                    </div>
                 </div>
             </div>
 
         </form>
     </main>
-    
+
 </body>
+
 </html>
