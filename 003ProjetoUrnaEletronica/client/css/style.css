@@ -41,7 +41,6 @@ h1 {
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 300px;
     font-size: 1.2em;
 }
 
@@ -73,9 +72,15 @@ input {
 
 img {
     max-width: 170px;
+    min-height: 245px;
+    object-fit: cover;
     background-color: white;
     padding: 20px;
     border-radius: 8px;
+}
+
+#iNumeroCandidato{
+    min-width: 350px;
 }
 
 /* Botões / Hover dos Botões */
@@ -135,6 +140,7 @@ button:hover {
 /* Estilos para os modais */
 .modal {
     display: none;
+    align-items: center;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -146,31 +152,32 @@ button:hover {
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    border-radius: 10px;
-    /* Borda arredondada */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* Sombra suave */
     text-align: center;
+    max-width: 400px;
+    margin: 10% auto;
+}
+
+.modal-info {
+    margin-bottom: 20px;
 }
 
 .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
+    color: #555;
+    font-size: 20px;
     font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
     cursor: pointer;
 }
+
+.close:hover {
+    color: #333;
+}
+
+/* Adicione um estilo para o span dentro do modal, se necessário */
+
 
 /* Estilo para desabilitar elementos */
 .disabled {
