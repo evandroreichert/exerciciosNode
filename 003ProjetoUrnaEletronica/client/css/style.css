@@ -79,7 +79,7 @@ img {
     border-radius: 8px;
 }
 
-#iNumeroCandidato{
+#iNumeroCandidato {
     min-width: 350px;
 }
 
@@ -176,14 +176,9 @@ button:hover {
     color: #333;
 }
 
-/* Adicione um estilo para o span dentro do modal, se necessário */
-
-
 /* Estilo para desabilitar elementos */
 .disabled {
     pointer-events: none;
     background-color: #c1c1c1;
-    /* Impede interação do usuário */
     opacity: 0.6;
-    /* Opacidade reduzida para indicar que está desabilitado */
 }
