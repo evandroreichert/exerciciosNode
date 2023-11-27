@@ -15,7 +15,11 @@ imgCandidato.src = 'assets/img/politico.png'
 btnCorrige.addEventListener('click', () => {
     numeroCandidatoInput.value = '00'
     nomeCandidato.innerHTML = 'Ivan Borchardt'
+    imgCandidato.src = 'assets/img/politico.png'
 })
+
+btnConfirma.addEventListener('click', fetchVoto)
+btnBranco.addEventListener('click', votoBranco)
 
 async function fetchCandidatos() {
     try {
@@ -51,8 +55,8 @@ function getDataFormatada() {
     const currentDate = new Date()
 
     const year = currentDate.getFullYear()
-    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-    const day = String(currentDate.getDate()).padStart(2, '0');
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0')
+    const day = String(currentDate.getDate()).padStart(2, '0')
 
     const hours = String(currentDate.getHours()).padStart(2, '0')
     const minutes = String(currentDate.getMinutes()).padStart(2, '0')
@@ -61,11 +65,11 @@ function getDataFormatada() {
 
     const formattedDate = `${year}${month}${day}${hours}${minutes}${seconds}${milliseconds}`
 
-    return formattedDate;
+    return formattedDate
 }
 
-btnConfirma.addEventListener('click', async function fetchVoto() {
-    const dataConcatenada = getDataFormatada();
+async function fetchVoto() {
+    const dataConcatenada = getDataFormatada()
 
     var option = {
         method: "POST",
@@ -81,36 +85,73 @@ btnConfirma.addEventListener('click', async function fetchVoto() {
     let mensagem = await response.json()
 
     if (mensagem.status == 200 && numeroCandidatoInput.value.trim() != '') {
-        mostrarModal('modalSucesso');
+        mostrarModal('modalSucesso')
 
-        let somSucesso = new Audio('../assets/audio/confirma-urna.mp3');
-            somSucesso.play();
-            somSucesso.volume = 0.1;
+        let somSucesso = new Audio('../assets/audio/confirma-urna.mp3')
+        somSucesso.play()
+        somSucesso.volume = 0.1
 
-        setTimeout(() => fecharModal('modalSucesso'), 2000);
-    } else {
-        console.error('Erro ao registrar voto. Contate o administrador do sistema.');
+        setTimeout(() => fecharModal('modalSucesso'), 2000)
+    } 
+    else {
+        console.error('Erro ao registrar voto. Contate o administrador do sistema.')
         mostrarModal('modalErro');
-        btnConfirma.setAttribute('disabled', '');
+        btnConfirma.setAttribute('disabled', '')
         btnConfirma.classList.add('disabled')
 
-        let somError = new Audio('../assets/audio/error-urna.mp3');
-        somError.play();
-        somSucesso.volume = 0.7;
+        let somError = new Audio('../assets/audio/error-urna.mp3')
+        somError.play()
+        somError.volume = 0.7
     }
-})
+}
+
+async function votoBranco() {
+    const dataConcatenada = getDataFormatada()
+
+    var option = {
+        method: "POST",
+        body: JSON.stringify({
+            rg: '',
+            numeroCandidato: 'BRANCO',
+            timeStamp: dataConcatenada
+        }),
+        headers: { "Content-Type": "application/json" }
+    };
+
+    let response = await fetch("http://localhost:3000/voto", option)
+    let mensagem = await response.json()
+
+    if (mensagem.status == 200) {
+        mostrarModal('modalSucesso')
+
+        let somSucesso = new Audio('../assets/audio/confirma-urna.mp3')
+        somSucesso.play()
+        somSucesso.volume = 0.1
+
+        setTimeout(() => fecharModal('modalSucesso'), 2000)
+    } 
+    else {
+        console.error('Erro ao registrar voto. Contate o administrador do sistema.')
+        mostrarModal('modalErro');
+        btnConfirma.setAttribute('disabled', '')
+        btnConfirma.classList.add('disabled')
+
+        let somError = new Audio('../assets/audio/error-urna.mp3')
+        somError.play()
+        somError.volume = 0.7
+    }
+}
 
 function mostrarModal(idModal) {
-    var modal = document.getElementById(idModal);
-    modal.style.display = "flex";
+    var modal = document.getElementById(idModal)
+    modal.style.display = "flex"
 
     // Desabilitar todos os elementos da tela
-    var elementosDesabilitaveis = document.querySelectorAll('button, input');
-    elementosDesabilitaveis.forEach(elemento => elemento.classList.add('disabled'));
+    var elementosDesabilitaveis = document.querySelectorAll('button, input')
+    elementosDesabilitaveis.forEach(elemento => elemento.classList.add('disabled'))
 }
 
 function fecharModal(idModal) {
-    var modal = document.getElementById(idModal);
-    modal.style.display = "none";
+    var modal = document.getElementById(idModal)
+    modal.style.display = "none"
 }
-  
