@@ -9,11 +9,13 @@ const btnConfirma = document.querySelector('.confirma')
 const btnCorrige = document.querySelector('.corrige')
 const btnBranco = document.querySelector('.branco')
 
+const elementosDesabilitaveis = document.querySelectorAll('button, input')
+
 numeroCandidatoInput.addEventListener('keydown', fetchCandidatos)
 numeroCandidatoInput.addEventListener('change', fetchCandidatos)
 
 infoButton.addEventListener('click', () => {
-    modalInfo.style.display = 'block'    
+    modalInfo.style.display = 'block'
 })
 
 const candidato = {}
@@ -99,8 +101,11 @@ async function fetchVoto() {
         somSucesso.play()
         somSucesso.volume = 0.1
 
+        // Desabilitar todos os elementos da tela
+        elementosDesabilitaveis.forEach(elemento => elemento.classList.add('disabled'))
+
         setTimeout(() => fecharModal('modalSucesso'), 2000)
-    } 
+    }
     else {
         console.error('Erro ao registrar voto. Contate o administrador do sistema.')
         mostrarModal('modalErro');
@@ -137,7 +142,7 @@ async function votoBranco() {
         somSucesso.volume = 0.1
 
         setTimeout(() => fecharModal('modalSucesso'), 2000)
-    } 
+    }
     else {
         console.error('Erro ao registrar voto. Contate o administrador do sistema.')
         mostrarModal('modalErro');
@@ -154,12 +159,12 @@ function mostrarModal(idModal) {
     var modal = document.getElementById(idModal)
     modal.style.display = "flex"
 
-    // Desabilitar todos os elementos da tela
-    var elementosDesabilitaveis = document.querySelectorAll('button, input')
-    elementosDesabilitaveis.forEach(elemento => elemento.classList.add('disabled'))
+
 }
 
 function fecharModal(idModal) {
     var modal = document.getElementById(idModal)
     modal.style.display = "none"
+    
+    elementosDesabilitaveis.forEach(elemento => elemento.classList.remove('disabled'))
 }
