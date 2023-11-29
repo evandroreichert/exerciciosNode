@@ -3,7 +3,6 @@ const cors = require('cors')
 const fs = require('fs/promises')
 const path = require('path')
 const bodyParser = require('body-parser')
-const { error } = require('console')
 
 const app = express()
 const port = 3000
@@ -14,8 +13,13 @@ app.use(express.static(path.join(__dirname, "public")))
 app.use(express.static(path.join(__dirname, "client")))
 app.use(bodyParser.json());
 
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/index.html")
+})
+
+app.get('/resultado', (req, res) => {
+    res.sendFile(__dirname + "/resultado.html")
 })
 
 app.get('/cargainicial', (req, res) => {
@@ -51,6 +55,7 @@ app.post('/voto', async (req, res) => {
     }
 })
 
+
 app.get('/apuracao', async (req, res) => {
 
     try {
@@ -78,11 +83,11 @@ app.get('/apuracao', async (req, res) => {
             }
         }
 
-        // Carregue as informações dos candidatos
+        // carregua as informações dos candidatos
         const candidatosCsv = await fs.readFile('config.csv', 'utf-8');
         const candidatosArray = candidatosCsv.split(',');
 
-        // Organize os dados dos candidatos em um objeto para facilitar o acesso
+        // organiza os dados dos candidatos em um objeto para facilitar o acesso
         const candidatosInfo = {};
         for (let i = 0; i < candidatosArray.length; i += 4) {
             candidatosInfo[candidatosArray[i + 1]] = {
@@ -91,7 +96,7 @@ app.get('/apuracao', async (req, res) => {
             };
         }
 
-        // Formatando os resultados
+        // formatando os resultados
         const resultadoApuracao = Object.entries(apuracao)
             .map(([numeroCandidato, qtdVotos]) => {
                 const infoCandidato = candidatosInfo[numeroCandidato];
@@ -103,7 +108,7 @@ app.get('/apuracao', async (req, res) => {
                     urlFotoCandidato: infoCandidato ? infoCandidato.imagem : null,
                 };
             })
-            .sort((a, b) => b.qtdVotos - a.qtdVotos); // Ordena em ordem decrescente pela quantidade de votos
+            .sort((a, b) => b.qtdVotos - a.qtdVotos); // ordena em ordem decrescente pela quantidade de votos
 
         res.json(resultadoApuracao);
 
