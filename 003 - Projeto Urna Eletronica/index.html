@@ -20,8 +20,18 @@
                 <div class="candidato">
                     <img src="img/politico.png" class="imgCandidato" alt="imagem do candidato">
                     <p class="nomeCandidato">Ivan Borchardt</p>
+                    <span class="info">?</span>
+                    <div id="modalCandidatos">
+                        <div class="modal-content">
+                            <h4 class="modal-info">Candidatos disponíveis: </h4>
+                            <p class="modal-info"><b>11 | 22 | 33 | 44 | 55</b></p>
+                            <span class="close" onclick="fecharModal('modalCandidatos')">FECHAR</span>
+                        </div>
+                    </div>
                     <input type="number" id="iNumeroCandidato" name="numeroCandidato" min="0"
                         max="99" minlength="2" maxlength="2" placeholder="Número do Candidato" value="" required>
+                        
+                        
                 </div>
 
                 <div class="actionsUrna">

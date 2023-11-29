@@ -1,7 +1,9 @@
 const numeroCandidatoInput = document.querySelector('#iNumeroCandidato')
 let nomeCandidato = document.querySelector('.nomeCandidato')
 let imgCandidato = document.querySelector('.imgCandidato')
-const candidato = {}
+
+const infoButton = document.querySelector('.info')
+const modalInfo = document.querySelector('#modalCandidatos')
 
 const btnConfirma = document.querySelector('.confirma')
 const btnCorrige = document.querySelector('.corrige')
@@ -9,6 +11,12 @@ const btnBranco = document.querySelector('.branco')
 
 numeroCandidatoInput.addEventListener('keydown', fetchCandidatos)
 numeroCandidatoInput.addEventListener('change', fetchCandidatos)
+
+infoButton.addEventListener('click', () => {
+    modalInfo.style.display = 'block'    
+})
+
+const candidato = {}
 
 btnCorrige.addEventListener('click', () => {
     numeroCandidatoInput.value = '00'

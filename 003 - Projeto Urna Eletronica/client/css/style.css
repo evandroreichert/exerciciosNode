@@ -27,6 +27,7 @@ main {
         -20px -20px 60px #ffffff;
     width: 500px;
     margin: auto;
+    position: relative;
 }
 
 h1 {
@@ -181,4 +182,30 @@ button:hover {
     pointer-events: none;
     background-color: #c1c1c1;
     opacity: 0.6;
+}
+
+.info {
+    background-color: #afafaf;
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    right: 12%;
+    bottom: 27.5%;
+    cursor: pointer;
+    z-index: 1;
+}
+
+#modalCandidatos {
+    display: none;
+    position: fixed;
+    bottom: 35%;
+    right: 23%;
+    z-index: 0;
+}
+
+#modalCandidatos p {
+    font-size: 1.1em;
 }
