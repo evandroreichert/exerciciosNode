@@ -8,6 +8,40 @@
     padding: 0;
 }
 
+.urna-container {
+    display: none;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container input {
+    max-width: 450px;
+    min-width: 250px;
+}
+
+.login-container h1 {
+    margin-bottom: 0;
+}
+
+.login-container p {
+    margin-bottom: 25px;
+}
+
+.inputcpf-container, .inputsenha-container {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
 body {
     background-color: #e0e0e0;
     height: 100vh;
@@ -200,6 +234,7 @@ button:hover {
 }
 
 #modalCandidatos {
+    display: none;
     position: absolute;
     bottom: 27%;
     right: -32%;
