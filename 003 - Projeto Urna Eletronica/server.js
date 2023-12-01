@@ -3,6 +3,9 @@ const cors = require('cors')
 const fs = require('fs/promises')
 const path = require('path')
 const bodyParser = require('body-parser')
+const jwt = require('jsonwebtoken')
+
+const SECRET = "minhasenhasupersecreta123"
 
 const app = express()
 const port = 3000
@@ -11,7 +14,28 @@ app.use(cors())
 
 app.use(express.static(path.join(__dirname, "public")))
 app.use(express.static(path.join(__dirname, "client")))
-app.use(bodyParser.json());
+app.use(bodyParser.json())
+
+
+
+function checkJWT(req, res, next) {
+    const token = req.header("x-access-token")
+
+    const indexTokenBlack = blacklist.findIndex(tokenLista => tokenLista == token)
+
+    if (indexTokenBlack > -1) {
+        res.status(401).end()
+    }
+
+    jwt.verify(token, SECRET, function (error, decoded) {
+        if (error) {
+            res.end()
+        }
+
+        next()
+    })
+
+}
 
 
 app.get('/', (req, res) => {
@@ -32,8 +56,49 @@ app.get('/cargainicial', (req, res) => {
     lerCandidatos()
 })
 
+app.post('/login', async (req, res) => {
+    const readEleitores = await fs.readFile('eleitores.csv', 'utf-8')
+    const eleitores = await readEleitores.split('\r\n')
 
-app.post('/voto', async (req, res) => {
+    const eleitorFormatado = []
+
+    eleitores.forEach(element => {
+        let eleitorArray = element.split(",")
+
+        let eleitor = {
+            cpf: eleitorArray[0],
+            senha: eleitorArray[1],
+            nome: eleitorArray[2]
+        }
+
+        eleitorFormatado.push(eleitor)
+        console.log(eleitorFormatado);
+    })
+
+    let isValidUser = false
+
+    function checkUser(cpfInput, senhaInput) {
+        for (const eleitor of eleitorFormatado) {
+            if (eleitor.cpf === cpfInput && eleitor.senha === senhaInput) {
+                isValidUser = true;
+                return
+            }
+        }
+    }
+
+    checkUser(req.body.cpf, req.body.senha)
+
+    if (isValidUser) {
+        const token = jwt.sign({ userId: 123 }, SECRET, { expiresIn: 180 })
+        res.status(200).json({ auth: true, token })
+    } else {
+        res.status(403).end()
+    }
+
+})
+
+
+app.post('/voto', checkJWT, async (req, res) => {
     try {
         let { rg, numeroCandidato, timeStamp } = req.body
 
