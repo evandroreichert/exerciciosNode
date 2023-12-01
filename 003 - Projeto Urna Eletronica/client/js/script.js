@@ -1,3 +1,9 @@
+const loginContainer = document.querySelector('.login-container')
+const urnaContainer = document.querySelector('.urna-container')
+const btnLogin = document.querySelector('.btn-continuar')
+
+btnLogin.addEventListener('click', login)
+
 const numeroCandidatoInput = document.querySelector('#iNumeroCandidato')
 let nomeCandidato = document.querySelector('.nomeCandidato')
 let imgCandidato = document.querySelector('.imgCandidato')
@@ -30,6 +36,35 @@ btnConfirma.addEventListener('click', fetchVoto)
 btnBranco.addEventListener('click', votoBranco)
 
 imgCandidato.src = 'assets/img/politico.png'
+
+async function login() {
+    let cpf = document.getElementById("iCpf").value
+    let senha = document.getElementById("iSenha").value
+
+    const options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            "cpf": cpf,
+            "senha": senha
+        })
+    };
+
+    let response = await fetch('http://localhost:3000/login', options)
+    let auth = await response.json()
+
+    sessionStorage.setItem("auth", auth.token)
+
+    console.log(auth)
+    console.log(response.status)
+
+    if (response.status == 200) {
+        loginContainer.style.display = 'none'
+        urnaContainer.style.display = 'flex'
+
+
+    }
+}
 
 async function fetchCandidatos() {
     try {
@@ -88,7 +123,7 @@ async function fetchVoto() {
             numeroCandidato: numeroCandidatoInput.value,
             timeStamp: dataConcatenada
         }),
-        headers: { "Content-Type": "application/json" }
+        headers: { "Content-Type": "application/json", "x-access-token": sessionStorage.getItem("auth") }
     };
 
     let response = await fetch("http://localhost:3000/voto", option)
@@ -101,7 +136,7 @@ async function fetchVoto() {
         somSucesso.play()
         somSucesso.volume = 0.1
 
-        // Desabilitar todos os elementos da tela
+        // desabilitar todos os elementos da tela
         elementosDesabilitaveis.forEach(elemento => elemento.classList.add('disabled'))
 
         setTimeout(() => fecharModal('modalSucesso'), 2000)
@@ -165,6 +200,6 @@ function mostrarModal(idModal) {
 function fecharModal(idModal) {
     var modal = document.getElementById(idModal)
     modal.style.display = "none"
-    
+
     elementosDesabilitaveis.forEach(elemento => elemento.classList.remove('disabled'))
 }

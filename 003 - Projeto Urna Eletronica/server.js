@@ -21,12 +21,6 @@ app.use(bodyParser.json())
 function checkJWT(req, res, next) {
     const token = req.header("x-access-token")
 
-    const indexTokenBlack = blacklist.findIndex(tokenLista => tokenLista == token)
-
-    if (indexTokenBlack > -1) {
-        res.status(401).end()
-    }
-
     jwt.verify(token, SECRET, function (error, decoded) {
         if (error) {
             res.end()
@@ -34,7 +28,6 @@ function checkJWT(req, res, next) {
 
         next()
     })
-
 }
 
 
@@ -72,15 +65,16 @@ app.post('/login', async (req, res) => {
         }
 
         eleitorFormatado.push(eleitor)
-        console.log(eleitorFormatado);
     })
 
     let isValidUser = false
+    let nomeEleitor = ''
 
     function checkUser(cpfInput, senhaInput) {
         for (const eleitor of eleitorFormatado) {
             if (eleitor.cpf === cpfInput && eleitor.senha === senhaInput) {
-                isValidUser = true;
+                nomeEleitor = eleitor.nome
+                isValidUser = true
                 return
             }
         }
@@ -90,7 +84,7 @@ app.post('/login', async (req, res) => {
 
     if (isValidUser) {
         const token = jwt.sign({ userId: 123 }, SECRET, { expiresIn: 180 })
-        res.status(200).json({ auth: true, token })
+        res.status(200).json({ auth: true, nomeEleitor, token })
     } else {
         res.status(403).end()
     }
@@ -106,15 +100,16 @@ app.post('/voto', checkJWT, async (req, res) => {
             "status": "200",
             "mensagem": "Voto Registrado Com sucesso"
         }
-        let errorMessage = {
-            "status": "500",
-            "mensagem": "Erro ao registrar voto, contate o administrador do sistema"
-        }
+
         await fs.appendFile('votacao.csv', `${rg},${numeroCandidato},${timeStamp}\n`);
 
         res.json(successMessage)
     }
     catch (error) {
+        let errorMessage = {
+            "status": "500",
+            "mensagem": "Erro ao registrar voto, contate o administrador do sistema"
+        }
         console.error("Erro:", error)
         res.json(errorMessage)
     }
