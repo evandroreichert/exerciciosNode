@@ -12,7 +12,26 @@
 
 <body>
 
-    <main>
+    <section class="login-container">
+
+        <h1>Login</h1>
+        <p>Digite seu CPF e senha para votar</p>
+
+        <div class="inputcpf-container">
+            <label for="iCpf">CPF</label>
+            <input type="number" name="" id="iCpf" class="cpf-input" placeholder="Digite seu CPF">
+        </div>
+
+        <div class="inputsenha-container">
+            <label for="iSenha">Senha</label>
+            <input type="password" name="" id="iSenha" class="senha-input" placeholder="Digite sua senha">
+        </div>
+
+        <button type="button" class="btn-continuar">Continuar</button>
+
+    </section>
+
+    <main class="urna-container">
         <form>
             <h1>Urna Eletrônica</h1>
 
@@ -28,10 +47,10 @@
                             <span class="close" onclick="fecharModal('modalCandidatos')">FECHAR</span>
                         </div>
                     </div>
-                    <input type="number" id="iNumeroCandidato" name="numeroCandidato" min="0"
-                        max="99" minlength="2" maxlength="2" placeholder="Número do Candidato" value="" required>
-                        
-                        
+                    <input type="number" id="iNumeroCandidato" name="numeroCandidato" min="0" max="99" minlength="2"
+                        maxlength="2" placeholder="Número do Candidato" value="" required>
+
+
                 </div>
 
                 <div class="actionsUrna">
