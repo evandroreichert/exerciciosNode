@@ -19,9 +19,8 @@ class UserController{
     update(req, res){
         let indexUser = buscarIndex(req.params.id)
         let users = getUsers()
-        users[indexUser].nome = req.body.nome
-        users[indexUser].ano = req.body.ano
-        users[indexUser].contribuicao = req.body.contribuicao
+        users[indexUser].usuario = req.body.usuario
+        users[indexUser].senha = req.body.senha
         res.status(200).json(users[indexUser])
     }
 
@@ -33,4 +32,3 @@ class UserController{
 }
 
 export default new UserController
-
