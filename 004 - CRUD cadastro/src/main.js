@@ -1,4 +1,5 @@
 import express from "express"
+import routes from "./routes.js"
 import UserController from "./app/controllers/UserController.js"
 import path from "path"
 import { fileURLToPath } from 'url';
@@ -12,6 +13,8 @@ const __dirname = path.dirname(__filename)
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())
 app.use(cors())
+
+app.use(routes)
 
 app.use(express.static('client'))
 
@@ -28,4 +31,4 @@ app.put("/user/:id", UserController.update)
 
 app.delete("/user/:id", UserController.delete)
 
-export default app 
+export default app
