@@ -1,4 +1,4 @@
-import UserRepository from "../repositories/UserRepository.js"
+import UserRepository from "../database/repositories/UserRepository.js"
 
 class UserController {
 
@@ -8,26 +8,22 @@ class UserController {
     }
 
     show(req, res) {
-        let user = buscarUser(req.params.id)
+        let user = UserRepository.findById(req.params.id)
         res.json(user)
     }
 
     store(req, res) {
-        getUsers().push(req.body)
-        res.status(201).send("Usuário cadastrado com sucesso")
+        UserRepository.create(req.body)
+        res.status(201).json("Usuário cadastrado com sucesso")
     }
 
     update(req, res) {
-        let indexUser = buscarIndex(req.params.id)
-        let users = getUsers()
-        users[indexUser].usuario = req.body.usuario
-        users[indexUser].senha = req.body.senha
-        res.status(200).json(users[indexUser])
+        let user = UserRepository.update(req.params.id, req.body)
+        res.status(200).json(user[indexUser])
     }
 
     delete(req, res) {
-        let indexUser = buscarIndex(req.params.id)
-        getUsers().splice(indexUser, 1)
+        UserRepository.delete(req.params.id)
         res.status(200).send(`Usuário ${req.params.id} excluído com sucesso!`)
     }
 }
